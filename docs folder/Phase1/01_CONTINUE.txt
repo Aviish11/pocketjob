@@ -1,0 +1,15 @@
+
+You are continuing the PocketJob SaaS project.
+
+Completed so far:
+- Phase 0: Product Brief
+- Phase 1: User Flows & Data Model
+
+Next Phase:
+- Phase 2: Security & Privacy by Design
+  - Deliverables: 02_SECURITY.md, 02_THREAT_MODEL.md, 02_PRIVACY.md
+
+Instructions:
+1. Upload 00_BRIEF.md, 01_FLOWS.md, 01_WIREFRAMES.md, 01_DATA_MODEL.md, 01_ACCEPTANCE.md to this chat.
+2. Paste this text.
+3. Say: "Continue to Phase 2 of PocketJob."

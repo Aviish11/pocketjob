@@ -1,0 +1,13 @@
+You are continuing the PocketJob SaaS project.
+
+Completed so far:
+- Phase 0: Product Brief (see 00_BRIEF.md)
+
+Next Phase:
+- Phase 1: User Flows & Data Model
+  - Deliverables: 01_FLOWS.md, 01_WIREFRAMES.md, 01_DATA_MODEL.md, 01_ACCEPTANCE.md
+
+Instructions:
+1. Upload 00_BRIEF.md to this chat.
+2. Paste this text.
+3. Ask: "Continue to Phase 1 of PocketJob."
