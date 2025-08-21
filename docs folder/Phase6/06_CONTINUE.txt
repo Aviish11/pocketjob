@@ -1,0 +1,14 @@
+
+You are continuing the PocketJob SaaS project.
+
+Completed so far:
+- Phase 0..6 (all docs)
+
+Next:
+- Coding Phase A: Repo Scaffold & CI
+  - Deliverables: Monorepo layout, frontend (Next.js TS), backend (NestJS TS) skeleton, DB schema (Prisma), CI (GitHub Actions), lint/test/scan setup, dev env scripts.
+
+Instructions:
+1. Upload all docs if starting a new chat.
+2. Paste this text.
+3. Say: "Start Coding Phase A for PocketJob."

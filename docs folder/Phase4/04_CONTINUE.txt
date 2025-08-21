@@ -1,0 +1,18 @@
+
+You are continuing the PocketJob SaaS project.
+
+Completed so far:
+- Phase 0: Product Brief
+- Phase 1: User Flows & Data Model
+- Phase 2: Security & Privacy by Design
+- Phase 3: Chrome Extension Spec
+- Phase 4: Email Integration Spec
+
+Next Phase:
+- Phase 5: Backend/API & Tenancy Spec
+  - Deliverables: 05_API_CONTRACT.md, 05_TENANCY.md, 05_ERROR_CODES.md, 05_RATE_LIMITS.md
+
+Instructions:
+1. Upload all previous phase files and 04_* files to this chat.
+2. Paste this text.
+3. Say: "Continue to Phase 5 of PocketJob."

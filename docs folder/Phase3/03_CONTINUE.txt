@@ -1,0 +1,17 @@
+
+You are continuing the PocketJob SaaS project.
+
+Completed so far:
+- Phase 0: Product Brief
+- Phase 1: User Flows & Data Model
+- Phase 2: Security & Privacy by Design
+- Phase 3: Chrome Extension Spec
+
+Next Phase:
+- Phase 4: Email Integration Spec (Gmail)
+  - Deliverables: 04_EMAIL_SPEC.md, 04_EMAIL_MAPPING.md, 04_ACCEPTANCE.md
+
+Instructions:
+1. Upload all previous phase files and 03_* files to this chat.
+2. Paste this text.
+3. Say: "Continue to Phase 4 of PocketJob."

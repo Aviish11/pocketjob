@@ -1,0 +1,19 @@
+
+You are continuing the PocketJob SaaS project.
+
+Completed so far:
+- Phase 0: Product Brief
+- Phase 1: User Flows & Data Model
+- Phase 2: Security & Privacy by Design
+- Phase 3: Chrome Extension Spec
+- Phase 4: Email Integration Spec
+- Phase 5: Backend/API & Tenancy Spec
+
+Next Phase:
+- Phase 6: UX Copy & Metrics
+  - Deliverables: 06_UX_COPY.md, 06_METRICS.md
+
+Instructions:
+1. Upload all previous phase files and 05_* files to this chat.
+2. Paste this text.
+3. Say: "Continue to Phase 6 of PocketJob."

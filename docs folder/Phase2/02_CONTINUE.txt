@@ -1,0 +1,16 @@
+
+You are continuing the PocketJob SaaS project.
+
+Completed so far:
+- Phase 0: Product Brief
+- Phase 1: User Flows & Data Model
+- Phase 2: Security & Privacy by Design
+
+Next Phase:
+- Phase 3: Chrome Extension Spec
+  - Deliverables: 03_EXTENSION_SPEC.md, 03_TEST_CASES.md
+
+Instructions:
+1. Upload 00_BRIEF.md, 01_* files, and 02_* files to this chat.
+2. Paste this text.
+3. Say: "Continue to Phase 3 of PocketJob."

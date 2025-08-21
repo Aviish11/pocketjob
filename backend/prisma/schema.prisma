@@ -1,0 +1,197 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id            String         @id @default(uuid())
+  name          String
+  createdAt     DateTime       @default(now())
+  users         User[]
+  applications  Application[]
+  listings      Listing[]
+  companies     Company[]
+  emailAccounts EmailAccount[]
+  emailThreads  EmailThread[]
+  emailMessages EmailMessage[]
+  tags          Tag[]
+  notes         Note[]
+  activities    ActivityLog[]
+  attachments   Attachment[] // ← ADD THIS LINE
+}
+
+model User {
+  id        String       @id @default(uuid())
+  orgId     String
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  email     String       @unique
+  name      String
+  role      String       @default("owner") // future: enum
+  createdAt DateTime     @default(now())
+}
+
+model Company {
+  id            String       @id @default(uuid())
+  orgId         String
+  org           Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  name          String
+  websiteDomain String?
+  createdAt     DateTime     @default(now())
+  listings      Listing[]
+}
+
+model Listing {
+  id          String       @id @default(uuid())
+  orgId       String
+  org         Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  title       String
+  companyId   String?
+  company     Company?     @relation(fields: [companyId], references: [id])
+  sourceSite  String
+  postUrl     String
+  location    String?
+  salaryText  String?
+  jobType     String?
+  description String?
+  postedAt    DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  application Application?
+
+  @@unique([orgId, postUrl])
+}
+
+model Application {
+  id        String            @id @default(uuid())
+  orgId     String
+  org       Organization      @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  listingId String            @unique
+  listing   Listing           @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  status    ApplicationStatus @default(in_progress)
+  appliedAt DateTime          @default(now())
+  topScore  Float?
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  emailThreads EmailThread[]
+  tags         ApplicationTag[]
+  notes        Note[]
+}
+
+enum ApplicationStatus {
+  in_progress
+  rejected
+  no_response
+}
+
+model EmailAccount {
+  id                String       @id @default(uuid())
+  orgId             String
+  org               Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  provider          String // "gmail"
+  providerAccountId String // email address
+  status            String       @default("connected") // or revoked
+  createdAt         DateTime     @default(now())
+}
+
+model EmailThread {
+  id               String       @id @default(uuid())
+  orgId            String
+  org              Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  provider         String
+  threadExternalId String
+  applicationId    String?
+  application      Application? @relation(fields: [applicationId], references: [id])
+  lastMessageAt    DateTime?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  messages EmailMessage[]
+
+  @@unique([orgId, provider, threadExternalId])
+}
+
+model EmailMessage {
+  id                String       @id @default(uuid())
+  orgId             String
+  org               Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  threadId          String
+  thread            EmailThread  @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  provider          String
+  messageExternalId String
+  fromAddress       String?
+  fromDisplay       String?
+  toAddresses       String[]
+  ccAddresses       String[]
+  subject           String?
+  snippet           String?
+  sentAt            DateTime?
+  rejectionScore    Float?
+
+  createdAt DateTime @default(now())
+
+  attachments Attachment[]
+
+  @@unique([orgId, provider, messageExternalId])
+}
+
+model Attachment {
+  id         String       @id @default(uuid())
+  orgId      String
+  org        Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  messageId  String
+  message    EmailMessage @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  filename   String
+  mimeType   String?
+  sizeBytes  Int?
+  storageUrl String?
+  createdAt  DateTime     @default(now())
+}
+
+model Tag {
+  id    String           @id @default(uuid())
+  orgId String
+  org   Organization     @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  name  String
+  apps  ApplicationTag[]
+
+  @@unique([orgId, name])
+}
+
+model ApplicationTag {
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  tagId         String
+  tag           Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([applicationId, tagId])
+}
+
+model Note {
+  id            String       @id @default(uuid())
+  orgId         String
+  org           Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  applicationId String
+  application   Application  @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  authorUserId  String?
+  body          String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model ActivityLog {
+  id        String       @id @default(uuid())
+  orgId     String
+  org       Organization @relation(fields: [orgId], references: [id], onDelete: Cascade)
+  actor     String // "system" or "user:{id}"
+  type      String // e.g., application.created, email.linked, status.updated
+  payload   Json
+  createdAt DateTime     @default(now())
+
+  @@index([orgId, createdAt])
+}
